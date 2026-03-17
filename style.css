@@ -1,0 +1,431 @@
+/* =========================================================
+   Daily Buzz — style.css
+   Dark mode, glassmorphism, smooth animations
+   ========================================================= */
+
+/* ---------- CSS Variables ---------- */
+:root {
+  --bg-dark:      #0d0f1a;
+  --bg-card:      rgba(255, 255, 255, 0.04);
+  --bg-card-h:    rgba(255, 255, 255, 0.08);
+  --border:       rgba(255, 255, 255, 0.09);
+  --accent:       #6c63ff;
+  --accent-glow:  rgba(108, 99, 255, 0.35);
+  --accent2:      #ff6584;
+  --text-primary: #eef0ff;
+  --text-muted:   #8890b0;
+  --success:      #3ecf8e;
+  --error:        #ff4d6d;
+  --error-bg:     rgba(255, 77, 109, 0.12);
+  --radius:       16px;
+  --radius-sm:    10px;
+  --shadow:       0 8px 32px rgba(0, 0, 0, 0.45);
+  --transition:   0.3s ease;
+  --font-body:    'Inter', sans-serif;
+  --font-display: 'Playfair Display', serif;
+}
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.6;
+  background-image:
+    radial-gradient(ellipse at 20% 10%, rgba(108, 99, 255, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 90%, rgba(255, 101, 132, 0.08) 0%, transparent 50%);
+}
+
+/* ---------- Accent Color ---------- */
+.accent {
+  color: var(--accent);
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  background: rgba(13, 15, 26, 0.75);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-icon {
+  font-size: 1.6rem;
+}
+
+.logo-text {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  letter-spacing: -0.5px;
+}
+
+.date-badge {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  letter-spacing: 0.3px;
+}
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+.main-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  letter-spacing: -1px;
+}
+
+.hero-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 540px;
+  margin: 0 auto 2rem;
+}
+
+/* Fetch Button */
+.btn-fetch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, var(--accent), #8b5cf6);
+  color: #fff;
+  border: none;
+  padding: 0.85rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: var(--font-body);
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 0 24px var(--accent-glow);
+  transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+  letter-spacing: 0.3px;
+}
+
+.btn-fetch:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 0 40px var(--accent-glow);
+}
+
+.btn-fetch:active {
+  transform: scale(0.97);
+}
+
+.btn-fetch:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-icon {
+  font-size: 1.1rem;
+}
+
+/* =========================================================
+   STATUS BAR
+   ========================================================= */
+.status-bar {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  min-height: 1.4rem;
+  transition: color var(--transition);
+}
+
+.status-bar.loading #status-text {
+  color: var(--accent);
+}
+
+.status-bar.success #status-text {
+  color: var(--success);
+}
+
+.status-bar.error #status-text {
+  color: var(--error);
+}
+
+/* Spinner via CSS animation */
+.spinner {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--accent);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  vertical-align: middle;
+  margin-right: 0.4rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* =========================================================
+   SKELETON LOADER
+   ========================================================= */
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.4rem;
+  margin-bottom: 2rem;
+  display: none; /* JS will toggle this */
+}
+
+.skeleton-grid.visible {
+  display: grid;
+}
+
+.skeleton-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.skeleton-line {
+  height: 14px;
+  border-radius: 6px;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.05) 25%,
+    rgba(255,255,255,0.12) 50%,
+    rgba(255,255,255,0.05) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton-line.wide   { width: 90%; }
+.skeleton-line.medium { width: 70%; }
+.skeleton-line.short  { width: 45%; }
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* =========================================================
+   NEWS GRID
+   ========================================================= */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.4rem;
+}
+
+/* =========================================================
+   NEWS CARD  (JS creates these elements)
+   ========================================================= */
+.news-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: transform var(--transition), background var(--transition), box-shadow var(--transition);
+  animation: fadeIn 0.4s ease both;
+  cursor: default;
+}
+
+.news-card:hover {
+  transform: translateY(-5px);
+  background: var(--bg-card-h);
+  box-shadow: var(--shadow), 0 0 20px var(--accent-glow);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Staggered animation delay per card */
+.news-card:nth-child(1)  { animation-delay: 0.05s; }
+.news-card:nth-child(2)  { animation-delay: 0.10s; }
+.news-card:nth-child(3)  { animation-delay: 0.15s; }
+.news-card:nth-child(4)  { animation-delay: 0.20s; }
+.news-card:nth-child(5)  { animation-delay: 0.25s; }
+.news-card:nth-child(6)  { animation-delay: 0.30s; }
+
+.card-category {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--accent);
+  background: rgba(108, 99, 255, 0.12);
+  border: 1px solid rgba(108, 99, 255, 0.25);
+  border-radius: 999px;
+  padding: 0.18rem 0.65rem;
+  align-self: flex-start;
+}
+
+.card-headline {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--text-primary);
+}
+
+.card-source {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: auto;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.card-source::before {
+  content: '🕐';
+  font-size: 0.7rem;
+}
+
+/* =========================================================
+   ERROR BOX
+   ========================================================= */
+.error-box {
+  display: none; /* JS toggles */
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background: var(--error-bg);
+  border: 1px solid rgba(255, 77, 109, 0.3);
+  border-radius: var(--radius);
+  padding: 2rem;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.error-box.visible {
+  display: flex;
+}
+
+.error-icon {
+  font-size: 2.5rem;
+}
+
+.error-box p {
+  color: #ffb3c0;
+  font-size: 0.95rem;
+}
+
+.btn-retry {
+  background: transparent;
+  border: 1px solid var(--error);
+  color: var(--error);
+  padding: 0.5rem 1.4rem;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+  font-family: var(--font-body);
+}
+
+.btn-retry:hover {
+  background: var(--error);
+  color: #fff;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.site-footer {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+}
+
+.site-footer code {
+  color: var(--accent);
+  background: rgba(108, 99, 255, 0.1);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 600px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .header-inner {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .news-grid,
+  .skeleton-grid {
+    grid-template-columns: 1fr;
+  }
+}

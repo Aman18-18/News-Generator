@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Daily Random News Headlines – Get random news for the day!"
+    />
+    <title>Daily Buzz – Random Headlines</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ===== HEADER ===== -->
+    <header class="site-header">
+      <div class="header-inner">
+        <div class="logo">
+          <span class="logo-icon">📰</span>
+          <span class="logo-text">Daily<span class="accent">Buzz</span></span>
+        </div>
+        <div class="date-badge" id="today-date">Loading date…</div>
+      </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main-content">
+
+      <!-- Hero -->
+      <section class="hero">
+        <h1 class="hero-title">
+          Today's Random <span class="accent">Headlines</span>
+        </h1>
+        <p class="hero-subtitle">
+          Hit the button below to fetch today's top random news —
+          built to practice <strong>Promises</strong>,
+          <strong>async</strong> &amp; <strong>await</strong>.
+        </p>
+        <button class="btn-fetch" id="fetch-btn">
+          <span class="btn-icon">⚡</span>
+          Fetch Today's News
+        </button>
+      </section>
+
+      <!-- Status Bar -->
+      <div class="status-bar" id="status-bar">
+        <span id="status-text">Ready — click the button to load headlines.</span>
+      </div>
+
+      <!-- Loading Skeleton (hidden by default, shown while loading) -->
+      <section class="skeleton-grid" id="skeleton-grid">
+        <div class="skeleton-card">
+          <div class="skeleton-line wide"></div>
+          <div class="skeleton-line medium"></div>
+          <div class="skeleton-line short"></div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-line wide"></div>
+          <div class="skeleton-line medium"></div>
+          <div class="skeleton-line short"></div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-line wide"></div>
+          <div class="skeleton-line medium"></div>
+          <div class="skeleton-line short"></div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-line wide"></div>
+          <div class="skeleton-line medium"></div>
+          <div class="skeleton-line short"></div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-line wide"></div>
+          <div class="skeleton-line medium"></div>
+          <div class="skeleton-line short"></div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-line wide"></div>
+          <div class="skeleton-line medium"></div>
+          <div class="skeleton-line short"></div>
+        </div>
+      </section>
+
+      <!-- News Cards Grid (JS populates this) -->
+      <section class="news-grid" id="news-grid">
+        <!-- News cards injected here by app.js -->
+      </section>
+
+      <!-- Error Box (hidden by default) -->
+      <div class="error-box" id="error-box" role="alert">
+        <span class="error-icon">⚠️</span>
+        <p id="error-message">Something went wrong. Please try again.</p>
+        <button class="btn-retry" id="retry-btn">↺ Retry</button>
+      </div>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+      <p>
+        Built to practice
+        <code>Promises</code>, <code>async/await</code>,
+        <code>fetch()</code> in JavaScript 🚀
+      </p>
+    </footer>
+
+    <!-- Link your JavaScript file here -->
+    <script src="app.js"></script>
+  </body>
+</html>
