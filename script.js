@@ -26,19 +26,26 @@ function displayDate(){
 displayDate();
 
 
-function fetchHeadlines(){
-    return new Promise((resolve,reject)=>{
-   const shouldFail = Math.random() <0.2;
+async function fetchHeadlines() {
+    const API_KEY = "pub_40389008f69041079f79e1f88f301581"; // paste your key here
 
-   setTimeout(()=>{
-    if(shouldFail){
-        reject(new Error('Something Went Wrong'));
+    const url = `https://newsdata.io/api/1/news?apikey=${API_KEY}&country=in&language=en`;
+
+    const response = await fetch(url);
+
+    if (!response.ok) {
+        throw new Error("Failed to fetch news");
     }
-    else{
-        resolve(['Headline 1','Headline 2','Headline 3','Headline 4','Headline 5']);
-    }
-   },2000);
-    });
+
+    const data = await response.json();
+
+    console.log(data); // keep this for debugging
+
+    return data.results.slice(0, 5).map(item => ({
+        category: item.category?.[0] || "General",
+        headline: item.title || "No title",
+        source: item.source_id || "Unknown"
+    }));
 }
 
 
